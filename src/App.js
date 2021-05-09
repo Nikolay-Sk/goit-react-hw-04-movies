@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch, NavLink } from "react-router-dom";
+import HomePage from "./pages/HomePage/HomePage";
+import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
+import routes from "./routes";
+import MoviesPage from "./pages/MoviesPage/MoviesPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    films: [],
+  };
+
+  render() {
+    return (
+      <>
+        <header>
+          <NavLink to={routes.HOME}>Home page</NavLink>
+          <NavLink to={routes.MOVIES}> Movies page</NavLink>
+        </header>
+        <Switch>
+          <Route exact path={routes.HOME} component={HomePage} />
+          <Route path={routes.MOVIE_DETAILS} component={MovieDetailsPage} />
+          <Route exact path={routes.MOVIES} component={MoviesPage} />
+        </Switch>
+      </>
+    );
+  }
 }
-
-export default App;
